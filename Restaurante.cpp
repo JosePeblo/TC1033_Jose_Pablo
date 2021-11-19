@@ -1,25 +1,39 @@
+/*
+ * Proyecto Restaurante
+ * José Pablo Martínez Valdivia
+ * A01275676
+ * 18/11/2021
+ */
 #include <iostream>
-#include "Platillos.h"
+#include "Alimento.h"
 
 int main()
 {
-    Platillo platillo_1("Lasagna",70,20);
-    platillo_1.setRelev(90);
-    std::cout << "Nombre: " << platillo_1.getNombre() << std::endl;
-    std::cout << "Precio final: " << platillo_1.getPrecioFinal() << std::endl;
-    std::cout << "Relevancia: " << platillo_1.getRelevancia() << std::endl;
+    Alimento *menu[2];
+    Alimento *a1 = new Bebida("Carajillo",100,4,true,false);
+    Platillo *a2 = new Platillo("Chuleta",120.5,7,"Plato fuerte");
 
-    Bebida bebida_1("Jugo de naranja",20,35,false);
-    bebida_1.setNombre("Nectar de la vida");
-    std::cout << "Nombre: " << bebida_1.getNombre() << std::endl;
-    std::cout << "Precio final: " << bebida_1.getPrecioFinal() << std::endl;
-    std::cout << "Relevancia: " << bebida_1.getRelevancia() << std::endl;
-    std::cout << "Es alcoholica?: " << bebida_1.getIsAlcoholica() << std::endl;
+    menu[0] = a1;
+    menu[1] = a2;
 
-    Postre postre_1("Brownie",70,20);
-    postre_1.setPrecio(80);
-    std::cout << "Nombre: " << postre_1.getNombre() << std::endl;
-    std::cout << "Precio final: " << postre_1.getPrecioFinal() << std::endl;
-    std::cout << "Relevancia: " << platillo_1.getRelevancia() << std::endl;
+    std::cout<<"Nombre: "<<menu[1]->getNombre()<<std::endl;
+    std::cout<<"Calificacion: "<<menu[1]->getCalificacion()<<std::endl;
+    
+    Platillo * platillo2 = (Platillo*)menu[1];
 
+    std::cout<<"Seccion actual: "<<platillo2->getSeccion()<<std::endl;
+    platillo2->setSeccion("Entradas");
+
+    std::cout<<"Nueva seccion: "<<platillo2->getSeccion()<<std::endl;
+
+    std::cout<<"\nNombre: "<<menu[0]->getNombre()<<std::endl;
+    std::cout<<"Precio final: "<<menu[0]->precioFinal()<<std::endl;
+    
+    Bebida *platillo1 = (Bebida*)menu[0];
+    
+    std::cout<<"Es alcoholica? "<<platillo1->getIsAlcoholica()<<std::endl;
+
+    delete a1;
+    delete a2;
+    return 0;
 }

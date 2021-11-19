@@ -1,180 +1,164 @@
+/*
+ * Proyecto Restaurante
+ * José Pablo Martínez Valdivia
+ * A01275676
+ * 18/11/2021
+ */
+#ifndef ALIMENTO_H
+#define ALIMENTO_H
 #include <iostream>
 
-class Platillo
+class Alimento
 {
+    protected:
+        std::string nombre;
+        float precio;
+        int calificacion;
     public:
-        Platillo();
-        Platillo(std::string nom, int pI, int rel);
+        Alimento();
+        Alimento(std::string,float,int);
         
-        void setPrecio(int);
-        void setRelev(int);
+        void setPrecio(float);
+        void setcalificacion(int);
         void setNombre(std::string);
 
-        int getPrecioFinal();
-        int getRelevancia();
+        float getPrecio();
+        int getCalificacion();
         std::string getNombre();
 
-    private:
-        std::string nombre;
-        int precioFinal;
-        int relevancia;
+        virtual int precioFinal();
 };
-Platillo::Platillo()
+class Platillo: public Alimento
+{
+    private:
+        std::string seccion;
+    public:
+        Platillo();
+        Platillo(std::string,float,int,std::string);
+        
+        void setSeccion(std::string);
+
+        std::string getSeccion();
+
+        int precioFinal();
+};
+class Bebida: public Alimento
+{
+    private:
+        bool alcoholica;
+        bool caliente;
+    public:
+        Bebida();
+        Bebida(std::string,float,int,bool,bool);
+        
+        void setIsAlcoholica(bool);
+        void setIsCaliente(bool);
+
+        bool getIsAlcoholica();
+        bool getIsCaliente();
+        int precioFinal();
+};
+
+// Constructores de Alimento
+Alimento::Alimento()
 {
     nombre = "";
-    precioFinal = 0;
-    relevancia = 0;
+    precio = 0;
+    calificacion = 0;
 }
-Platillo::Platillo(std::string nom, int pI, int rel)
+Alimento::Alimento(std::string nom, float prec, int calif)
 {
     nombre = nom;
-    precioFinal = pI*1.30;
-    relevancia = rel;
+    precio = prec;
+    calificacion = calif;
 }
-void Platillo::setPrecio(int pI)
+//Setters
+void Alimento::setPrecio(float prec)
 {
-    precioFinal = pI*1.30;
+    precio = prec;
 }
-void Platillo::setRelev(int rel)
+void Alimento::setcalificacion(int calif)
 {
-    relevancia = rel;
+    calificacion = calif;
 }
-void Platillo::setNombre(std::string nom)
+void Alimento::setNombre(std::string nom)
 {
     nombre = nom;
 }
-
-int Platillo::getPrecioFinal()
+//Getters
+float Alimento::getPrecio()
 {
-    return precioFinal;
+    return precio;
 }
-int Platillo::getRelevancia()
+int Alimento::getCalificacion()
 {
-    return relevancia;
+    return calificacion;
 }
-std::string Platillo::getNombre()
+std::string Alimento::getNombre()
 {
     return nombre;
 }
 
-class Bebida
+int Alimento::precioFinal()
 {
-    public:
-        Bebida();
-        Bebida(std::string nom, int pI, int rel, bool alc);
-        
-        void setPrecio(int);
-        void setRelev(int);
-        void setNombre(std::string);
+    return precio*1.3;
+}
+// Constructores de platillo
+Platillo::Platillo()
+{
+    Alimento();
+    seccion = "";
+}
+Platillo::Platillo(std::string nom,float prec,int calif,std::string secc):
+                                                 Alimento(nom,prec,calif)
+{
+    seccion = secc;
+}
+void Platillo::setSeccion(std::string secc)
+{
+    seccion = secc;
+}
+std::string Platillo::getSeccion()
+{
+    return seccion;
+}
+int Platillo::precioFinal()
+{
+    return precio*1.5;
+}
 
-        int getPrecioFinal();
-        int getRelevancia();
-        bool getIsAlcoholica();
-        std::string getNombre();
-
-    private:
-        std::string nombre;
-        int precioFinal;
-        int relevancia;
-        bool alcoholica;
-};
+// Constructores de Bebida
 Bebida::Bebida()
 {
-    nombre = "";
-    precioFinal = 0;
-    relevancia = 0;
+    Alimento();
     alcoholica = false;
 }
-Bebida::Bebida(std::string nom, int pI, int rel, bool alc)
+Bebida::Bebida(std::string nom,float prec,int calif,bool alc,bool cal):
+                                              Alimento(nom,prec,calif)
 {
-    nombre = nom;
-    precioFinal = pI*1.90;
-    relevancia = rel;
+    alcoholica = alc;
+    caliente = cal;
+}
+void Bebida::setIsAlcoholica(bool alc)
+{
     alcoholica = alc;
 }
-void Bebida::setPrecio(int pI)
+void Bebida::setIsCaliente(bool cal)
 {
-    precioFinal = pI*1.90;
-}
-void Bebida::setRelev(int rel)
-{
-    relevancia = rel;
-}
-void Bebida::setNombre(std::string nom)
-{
-    nombre = nom;
+    caliente = cal;
 }
 
-int Bebida::getPrecioFinal()
-{
-    return precioFinal;
-}
-int Bebida::getRelevancia()
-{
-    return relevancia;
-}
 bool Bebida::getIsAlcoholica()
 {
     return alcoholica;
 }
-std::string Bebida::getNombre()
+bool Bebida::getIsCaliente()
 {
-    return nombre;
+    return caliente;
+}
+int Bebida::precioFinal()
+{
+    return precio*1.9;
 }
 
-class Postre
-{
-    public:
-        Postre();
-        Postre(std::string nom, int pI, int rel);
-        
-        void setPrecio(int);
-        void setRelev(int);
-        void setNombre(std::string);
-
-        int getPrecioFinal();
-        int getRelevancia();
-        std::string getNombre();
-
-    private:
-        std::string nombre;
-        int precioFinal;
-        int relevancia;
-};
-Postre::Postre()
-{
-    nombre = "";
-    precioFinal = 0;
-    relevancia = 0;
-}
-Postre::Postre(std::string nom, int pI, int rel)
-{
-    nombre = nom;
-    precioFinal = pI*1.60;
-    relevancia = rel;
-}
-void Postre::setPrecio(int pI)
-{
-    precioFinal = pI*1.60;
-}
-void Postre::setRelev(int rel)
-{
-    relevancia = rel;
-}
-void Postre::setNombre(std::string nom)
-{
-    nombre = nom;
-}
-
-int Postre::getPrecioFinal()
-{
-    return precioFinal;
-}
-int Postre::getRelevancia()
-{
-    return relevancia;
-}
-std::string Postre::getNombre()
-{
-    return nombre;
-}
+#endif
