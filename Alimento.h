@@ -28,13 +28,13 @@ class Alimento
 
         virtual int precioFinal();
 };
-class Platillo: public Alimento
+class Comida: public Alimento
 {
     private:
         std::string seccion;
     public:
-        Platillo();
-        Platillo(std::string,float,int,std::string);
+        Comida();
+        Comida(std::string,float,int,std::string);
         
         void setSeccion(std::string);
 
@@ -103,26 +103,26 @@ int Alimento::precioFinal()
 {
     return precio*1.3;
 }
-// Constructores de platillo
-Platillo::Platillo()
+// Constructores de Comida
+Comida::Comida()
 {
     Alimento();
     seccion = "";
 }
-Platillo::Platillo(std::string nom,float prec,int calif,std::string secc):
+Comida::Comida(std::string nom,float prec,int calif,std::string secc):
                                                  Alimento(nom,prec,calif)
 {
     seccion = secc;
 }
-void Platillo::setSeccion(std::string secc)
+void Comida::setSeccion(std::string secc)
 {
     seccion = secc;
 }
-std::string Platillo::getSeccion()
+std::string Comida::getSeccion()
 {
     return seccion;
 }
-int Platillo::precioFinal()
+int Comida::precioFinal()
 {
     return precio*1.5;
 }
