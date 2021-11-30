@@ -16,7 +16,7 @@ class Menu
         Comida comidas[tam];
         Bebida bebidas[tam];
     public:
-        //Menu();
+        Menu(){}
         Menu(Comida[],Bebida[]);
         
         void setComidas(Comida[]);

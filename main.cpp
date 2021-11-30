@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include "Alimento.h"
 #include "Menu.h"
-//#include "Menu.h"
 
 void Pruebas();
 void crearMenu(int,int,int);
