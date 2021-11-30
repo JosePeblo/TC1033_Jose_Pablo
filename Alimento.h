@@ -10,23 +10,20 @@
 
 class Alimento
 {
-    protected:
+    private:
         std::string nombre;
         float precio;
-        int calificacion;
     public:
         Alimento();
-        Alimento(std::string,float,int);
+        Alimento(std::string,float);
         
         void setPrecio(float);
-        void setcalificacion(int);
         void setNombre(std::string);
 
         float getPrecio();
-        int getCalificacion();
         std::string getNombre();
 
-        virtual int precioFinal();
+        virtual int precioFinal() = 0;
 };
 class Comida: public Alimento
 {
@@ -34,7 +31,8 @@ class Comida: public Alimento
         std::string seccion;
     public:
         Comida();
-        Comida(std::string,float,int,std::string);
+        Comida(std::string,float,std::string);
+        ~Comida(){};
         
         void setSeccion(std::string);
 
@@ -49,7 +47,7 @@ class Bebida: public Alimento
         bool caliente;
     public:
         Bebida();
-        Bebida(std::string,float,int,bool,bool);
+        Bebida(std::string,float,bool,bool);
         
         void setIsAlcoholica(bool);
         void setIsCaliente(bool);
@@ -64,23 +62,18 @@ Alimento::Alimento()
 {
     nombre = "";
     precio = 0;
-    calificacion = 0;
 }
-Alimento::Alimento(std::string nom, float prec, int calif)
+Alimento::Alimento(std::string nom, float prec)
 {
     nombre = nom;
     precio = prec;
-    calificacion = calif;
 }
 //Setters
 void Alimento::setPrecio(float prec)
 {
     precio = prec;
 }
-void Alimento::setcalificacion(int calif)
-{
-    calificacion = calif;
-}
+
 void Alimento::setNombre(std::string nom)
 {
     nombre = nom;
@@ -90,10 +83,6 @@ float Alimento::getPrecio()
 {
     return precio;
 }
-int Alimento::getCalificacion()
-{
-    return calificacion;
-}
 std::string Alimento::getNombre()
 {
     return nombre;
@@ -101,16 +90,16 @@ std::string Alimento::getNombre()
 
 int Alimento::precioFinal()
 {
-    return precio*1.3;
+    return precio;
 }
 // Constructores de Comida
 Comida::Comida()
 {
-    Alimento();
+    setNombre("");
+    setPrecio(0);
     seccion = "";
 }
-Comida::Comida(std::string nom,float prec,int calif,std::string secc):
-                                                 Alimento(nom,prec,calif)
+Comida::Comida(std::string nom,float prec,std::string secc):Alimento(nom,prec)
 {
     seccion = secc;
 }
@@ -124,17 +113,17 @@ std::string Comida::getSeccion()
 }
 int Comida::precioFinal()
 {
-    return precio*1.5;
+    return getPrecio()*1.5;
 }
 
 // Constructores de Bebida
 Bebida::Bebida()
 {
-    Alimento();
+    setNombre("");
+    setPrecio(0);
     alcoholica = false;
 }
-Bebida::Bebida(std::string nom,float prec,int calif,bool alc,bool cal):
-                                              Alimento(nom,prec,calif)
+Bebida::Bebida(std::string nom,float prec,bool alc,bool cal):Alimento(nom,prec)
 {
     alcoholica = alc;
     caliente = cal;
@@ -158,7 +147,7 @@ bool Bebida::getIsCaliente()
 }
 int Bebida::precioFinal()
 {
-    return precio*1.9;
+    return getPrecio()*1.9;
 }
 
 #endif

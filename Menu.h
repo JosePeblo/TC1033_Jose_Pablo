@@ -9,18 +9,17 @@
 #include <iostream>
 #include "Alimento.h"
 
-const int tam = 10;
 class Menu
 {
     private:
-        Comida comidas[tam];
-        Bebida bebidas[tam];
+        Comida *comidas;
+        Bebida *bebidas;
     public:
         Menu(){}
-        Menu(Comida[],Bebida[]);
+        Menu(Comida*[],Bebida*[]);
         
-        void setComidas(Comida[]);
-        void setBebidas(Bebida[]);
+        void setComidas(Comida*[]);
+        void setBebidas(Bebida*[]);
 
         Comida *getComidas();
         Bebida *getBebidas();
@@ -31,30 +30,19 @@ class Menu
         void agregarAlimento(Comida);
         void agregarAlimento(Bebida);
 };
-Menu::Menu(Comida _comidas[],Bebida _bebidas[])
+Menu::Menu(Comida *_comidas[],Bebida *_bebidas[])
 {
-    for(int i = 0; i < tam; i++)
-    {
-        comidas[i] = _comidas[i];
-    }
-    for(int i = 0; i < tam; i++)
-    {
-        bebidas[i] = _bebidas[i];
-    }
+    comidas = *_comidas;
+    bebidas = *_bebidas;
 }
-void Menu::setComidas(Comida _comidas[])
+
+void Menu::setComidas(Comida *_comidas[])
 {
-    for(int i = 0; i < tam; i++)
-    {
-        comidas[i] = _comidas[i];
-    }
+    comidas = *_comidas;
 }
-void Menu::setBebidas(Bebida _bebida[])
+void Menu::setBebidas(Bebida *_bebida[])
 {
-    for(int i = 0; i < tam; i++)
-    {
-        bebidas[i] = _bebida[i];
-    }
+    bebidas = *_bebida;
 }
 Comida *Menu::getComidas()
 {
@@ -66,14 +54,18 @@ Bebida *Menu::getBebidas()
 }
 void Menu::printMenu()
 {
-    for(int i = 0; i < tam; i++)
+    for(int i = 0; i < 5; i++)
     {
         std::cout<<"Platillo n["<<i<<"] "<<comidas[i].getNombre()<<std::endl;
     }
     std::cout<<std::endl;
-    for(int i = 0; i < tam; i++)
+    for(int i = 0; i < 5; i++)
     {
         std::cout<<"Bebida n["<<i<<"] "<<bebidas[i].getNombre()<<std::endl;
     }
+}
+void Menu::borrarAlimento(int index)
+{
+    
 }
 #endif
