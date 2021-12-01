@@ -123,10 +123,10 @@ Bebida::Bebida()
     setPrecio(0);
     alcoholica = false;
 }
-Bebida::Bebida(std::string nom,float prec,bool alc,bool cal):Alimento(nom,prec)
+Bebida::Bebida(std::string nom,float prec,bool alc,bool hot):Alimento(nom,prec)
 {
     alcoholica = alc;
-    caliente = cal;
+    caliente = hot;
 }
 void Bebida::setIsAlcoholica(bool alc)
 {

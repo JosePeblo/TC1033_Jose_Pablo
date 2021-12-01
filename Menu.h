@@ -8,7 +8,7 @@
 #define MENU_H
 #include <iostream>
 #include "Alimento.h"
-
+const int size = 50;
 class Menu
 {
     private:
@@ -16,33 +16,33 @@ class Menu
         Bebida *bebidas;
     public:
         Menu(){}
-        Menu(Comida*[],Bebida*[]);
+        Menu(Comida&,Bebida&);
         
-        void setComidas(Comida*[]);
-        void setBebidas(Bebida*[]);
+        void setComidas(Comida&);
+        void setBebidas(Bebida&);
 
         Comida *getComidas();
         Bebida *getBebidas();
 
-        void printMenu();
-
-        void borrarAlimento(int);
+        void borrarAlimento(int,char);
         void agregarAlimento(Comida);
         void agregarAlimento(Bebida);
+        int tamComida();
+        int tamBebida();
 };
-Menu::Menu(Comida *_comidas[],Bebida *_bebidas[])
+Menu::Menu(Comida &_comidas,Bebida &_bebidas)
 {
-    comidas = *_comidas;
-    bebidas = *_bebidas;
+    comidas = &_comidas;
+    bebidas = &_bebidas;
 }
 
-void Menu::setComidas(Comida *_comidas[])
+void Menu::setComidas(Comida &_comidas)
 {
-    comidas = *_comidas;
+    comidas = &_comidas;
 }
-void Menu::setBebidas(Bebida *_bebida[])
+void Menu::setBebidas(Bebida &_bebida)
 {
-    bebidas = *_bebida;
+    bebidas = &_bebida;
 }
 Comida *Menu::getComidas()
 {
@@ -52,20 +52,67 @@ Bebida *Menu::getBebidas()
 {
     return bebidas;
 }
-void Menu::printMenu()
+
+void Menu::borrarAlimento(int index,char tipo)
 {
-    for(int i = 0; i < 5; i++)
+    switch(tipo)
     {
-        std::cout<<"Platillo n["<<i<<"] "<<comidas[i].getNombre()<<std::endl;
-    }
-    std::cout<<std::endl;
-    for(int i = 0; i < 5; i++)
-    {
-        std::cout<<"Bebida n["<<i<<"] "<<bebidas[i].getNombre()<<std::endl;
+        case 'c':
+            for(index; index < size-1; index++)
+            {
+                comidas[index].setNombre(comidas[index+1].getNombre());
+            }
+            break;
+        case 'b':
+            for(index; index < size-1; index++)
+            {
+                bebidas[index].setNombre(bebidas[index+1].getNombre());
+            }
+            break;
     }
 }
-void Menu::borrarAlimento(int index)
+void Menu::agregarAlimento(Comida tempCom)
 {
-    
+    for(int i = 0; i < size; i++)
+    {
+        if(comidas[i].getNombre() == "")
+        {
+            comidas[i] = tempCom;
+            break;
+        }
+    }
+}
+void Menu::agregarAlimento(Bebida tempBeb)
+{
+    for(int i = 0; i < size; i++)
+    {
+        if(bebidas[i].getNombre() == "")
+        {
+            bebidas[i] = tempBeb;
+            break;
+        }
+    }
+}
+int Menu::tamComida()
+{
+    for(int i = 0; i < 50; i++)
+    {
+        if(comidas[i].getNombre() == "")
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+int Menu::tamBebida()
+{
+    for(int i = 0; i < 50; i++)
+    {
+        if(bebidas[i].getNombre() == "")
+        {
+            return i;
+        }
+    }
+    return 0;
 }
 #endif
