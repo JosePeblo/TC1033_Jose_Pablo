@@ -13,36 +13,63 @@
 
 void Pruebas();
 void crearMenu(Menu,int,int);
-
+void printMenu(Menu);
 
 int main()
 {
     int tam = 5;
-    Comida *comidas = new Comida[tam];
-    Bebida *bebidas = new Bebida[tam];
+    Comida comidas[50];
+    Bebida bebidas[50];
 
-    Comida *copiaDeComidas;
+    Comida aux("frijoles",50,"acompaniamiento");
 
     comidas[0] = Comida("fileteM",100,"carnes");
     comidas[1] = Comida("chuleta",200,"carnes");
     comidas[2] = Comida("camaron",300,"pescados");
     comidas[3] = Comida("supdcebolla",80,"sopas");
     comidas[4] = Comida("atun",2000,"pescados");
+    comidas[5] = Comida("carpacio",400,"entradas"); 
 
-    Menu nueMenu(&comidas,&bebidas);
-    nueMenu.printMenu();
-    nueMenu.borrarAlimento(2);
-    nueMenu.printMenu();
+    bebidas[0] = Bebida("martini",140,true,false);
+    bebidas[1] = Bebida("americano",30,false,true);
+    bebidas[2] = Bebida("JugoNaranja",40,false,false);
+
+    Menu nueMenu(*comidas,*bebidas);
+    printMenu(nueMenu);
+    nueMenu.agregarAlimento(aux);
+    nueMenu.borrarAlimento(1,'b');
+    std::cout<<std::endl;
+    printMenu(nueMenu);
+
+    std::cout<<nueMenu.tamComida();
     
     getch();
-
-    delete[] comidas;
-    delete[] bebidas;
-    
     return 0;
 }
 
-
+void printMenu(Menu ptrMenu)
+{
+    int tam = ptrMenu.tamComida();
+    for(int i = 0; i < tam; i++)
+    {
+        if(ptrMenu.getComidas()[i].getNombre() == "")
+        {
+            break;
+        }
+        std::cout<<"Platillo n["<<i<<"] "<<ptrMenu.getComidas()[i].getNombre()
+                                                                  <<std::endl;
+    }
+    std::cout<<std::endl;
+    tam = ptrMenu.tamBebida();
+    for(int i = 0; i < tam; i++)
+    {
+        if(ptrMenu.getBebidas()[i].getNombre() == "")
+        {
+            break;
+        }
+        std::cout<<"Bebida n["<<i<<"] "<<ptrMenu.getBebidas()[i].getNombre()<<std::endl;
+    }
+}
 
 // void principal()
 // {
