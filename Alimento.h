@@ -34,8 +34,6 @@ class Alimento
 
         float getPrecio();
         std::string getNombre();
-
-        virtual int precioFinal() = 0;
 };
 
 /**
@@ -127,7 +125,7 @@ class Comida: public Alimento
 
         std::string getSeccion();
 
-        int precioFinal();
+        float precioFinal();
 };
 
 /**
@@ -188,7 +186,7 @@ std::string Comida::getSeccion()
  * @param
  * @return int precio*1.5
  */
-int Comida::precioFinal()
+float Comida::precioFinal()
 {
     return getPrecio()*1.5;
 }
@@ -211,7 +209,7 @@ class Bebida: public Alimento
 
         bool getIsAlcoholica();
         bool getIsCaliente();
-        int precioFinal();
+        float precioFinal();
 };
 
 /**
@@ -225,6 +223,7 @@ Bebida::Bebida()
     setNombre("");
     setPrecio(0);
     alcoholica = false;
+    caliente = false;
 }
 
 /**
@@ -294,7 +293,7 @@ bool Bebida::getIsCaliente()
  * @param
  * @return int precio*1.9
  */
-int Bebida::precioFinal()
+float Bebida::precioFinal()
 {
     return getPrecio()*1.9;
 }
