@@ -179,7 +179,7 @@ std::string Comida::getSeccion()
 }
 
 /**
- * Método que regresa el precio que tiene que tener el alimento
+ * Método que regresa el precio que tiene que tener el alimento 
  * multiplicando el precio dado en insumos por lo que gana el 
  * restaruante de su precio final
  * 
@@ -286,7 +286,7 @@ bool Bebida::getIsCaliente()
 }
 
 /**
- * Método que regresa el precio que tiene que tener el alimento
+ * Método que regresa el precio que tiene que tener el alimento 
  * multiplicando el precio dado en insumos por lo que gana el 
  * restaruante de su precio final
  * 
